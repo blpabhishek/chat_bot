@@ -1,5 +1,5 @@
 var express = require('express');
-var bodyParser = require('body-parser');
+var bodyParser = require('./bodyParser.js');
 var queryString = require('querystring');
 var cookie_parser = require('cookie-parser');
 var app = express();
