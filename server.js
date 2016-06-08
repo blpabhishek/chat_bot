@@ -1,4 +1,3 @@
-var http = require('http');
 var routers = require('./routers.js');
 const PORT = 5000;
 
