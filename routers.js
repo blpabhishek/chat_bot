@@ -1,13 +1,12 @@
 var express = require('express');
 var bodyParser = require('./bodyParser.js');
 var request = require('request');
-var queryString = require('querystring');
+
+const AUTH_TOKEN = process.env.AUTH_TOKEN;
+const PAGE_TOKEN = process.env.PAGE_TOKEN;
+
 var app = express();
-
 app.use(bodyParser);
-
-const PAGE_TOKEN = "EAAONmOIGzw4BAI4ZBY1u1CkTlVJlxWY66iI9e4ZAXJ0pTuZCfjXWkCCZBVQyke4fzxFMKHdCZBxtdwMSy1gWyPqkIcvt6Y2ngpQPztxEBm1yekcKZCrzKX4WVnZC1CZAob7QyU5Q89SPV3Er6uozmOI5NFdJRMugvVI4MwzdfWvhiwZDZD";
-
 
 
 function sendTextMessage(sender, text) {
@@ -34,7 +33,7 @@ function sendTextMessage(sender, text) {
 
 app.get('/webhook/', function(req, res) {
     console.log('This is the query', req.query);
-    if (req.query['hub.verify_token'] === 'this_is_the_token')
+    if (req.query['hub.verify_token'] === AUTH_TOKEN)
         res.send(req.query['hub.challenge']);
     res.send('Error, wrong validation token');
 });
