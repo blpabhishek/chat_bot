@@ -21,6 +21,7 @@ app.get('/webhook/', function(req, res) {
 app.post('/webhook', function(req, res) {
     var data = '';
     req.on('data', function(chunk) {
+    	console.log('This is the data',data);
         data += chunk;
     });
     req.on('end', function() {
