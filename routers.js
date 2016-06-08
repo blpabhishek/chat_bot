@@ -21,13 +21,13 @@ app.get('/webhook/', function(req, res) {
 app.post('/webhook', function(req, res) {
     var data = '';
     req.on('data', function(chunk) {
-    	console.log('This is the data',data);
+    	console.log('chunk',data);
         data += chunk;
     });
     req.on('end', function() {
         data = queryString.parse(data);
         req.body = data;
-        console.log('This is the data',data);
+        console.log('This is the final  data',data);
         // messaging_events = req.body.entry[0].messaging;
         // for (i = 0; i < messaging_events.length; i++) {
         //     event = req.body.entry[0].messaging[i];
