@@ -19,7 +19,8 @@ app.get('/webhook/', function(req, res) {
 
 app.post('/webhook', function(req, res) {
 	console.log('This is the final  data',req.body);
-  var data = JSON.parse(req.body);
+
+  var data = JSON.parse(Object.keys(req.body)[0]);
   var messaging_events = data.entry[0].messaging;
   for (i = 0; i < messaging_events.length; i++) {
     event = req.body.entry[0].messaging[i];
