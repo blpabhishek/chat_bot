@@ -31,4 +31,8 @@ app.post('/webhook', function(req, res) {
     res.sendStatus(200);
 });
 
+app.get('/policy.html',function(req,res){
+    res.send("Our Policy");
+});
+
 module.exports = app;
