@@ -19,7 +19,7 @@ app.post('/webhook', function(req, res) {
     var data = JSON.parse(Object.keys(req.body)[0]);
     var messagingEvents = data.entry[0].messaging;
 
-    for (int index = 0; index < messagingEvents.length; index++) {
+    for (var index = 0; index < messagingEvents.length; index++) {
         var event = data.entry[0].messaging[index];
         var sender = event.sender.id;
         if (event.message && event.message.text) {
