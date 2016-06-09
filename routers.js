@@ -9,7 +9,7 @@ var app = express();
 app.use(bodyParser);
 
 
-function sendTextMessage(sender, text) {
+var sendTextMessage = function (sender, text) {
   messageData = {
     text:text
   }
@@ -40,14 +40,14 @@ app.get('/webhook/', function(req, res) {
 
 
 app.post('/webhook', function(req, res) {
-  var data = JSON.parse(Object.keys(req.body)[0]);
-  var messaging_events = data.entry[0].messaging;
-  for (i = 0; i < messaging_events.length; i++) {
-    event = data.entry[0].messaging[i];
+  var messageObject = JSON.parse(Object.keys(req.body)[0]);
+  var messagingEvents = messageObject.entry[0].messaging;
+  for (i = 0; i < messagingEvents.length; i++) {
+    event = messageObject.entry[0].messaging[i];
     sender = event.sender.id;
     if (event.message && event.message.text) {
       text = event.message.text;
-      console.log("Message",text);
+      console.log("Message:",text);
       sendTextMessage(sender,'I am Bot');
     }
   }
