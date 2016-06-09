@@ -1,2 +1,4 @@
 node_modules/
 secret.sh
+npm-debug.log
+.DS_Store
