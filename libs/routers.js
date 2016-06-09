@@ -32,7 +32,7 @@ app.post('/webhook', function(req, res) {
 });
 
 app.get('/policy.html',function(req,res){
-    res.send("Our Policy");
+    res.send("Our Policy",200);
 });
 
 module.exports = app;
