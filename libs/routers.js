@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('./bodyParser.js');
-var actions = require('./actions.js')
+var actions = require('./actions.js');
+
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
 
 var app = express();
@@ -15,19 +16,19 @@ app.get('/webhook/', function(req, res) {
 
 
 app.post('/webhook', function(req, res) {
-  var data = JSON.parse(Object.keys(req.body)[0]);
+    var data = JSON.parse(Object.keys(req.body)[0]);
+    var messagingEvents = data.entry[0].messaging;
 
-  var messaging_events = data.entry[0].messaging;
-  for (i = 0; i < messaging_events.length; i++) {
-    event = data.entry[0].messaging[i];
-    sender = event.sender.id;
-    if (event.message && event.message.text) {
-      text = event.message.text;
-      console.log("LOG: Message",text);
-      sendTextMessage(sender,'I am Bot');
+    for (int index = 0; index < messagingEvents.length; index++) {
+        var event = data.entry[0].messaging[index];
+        var sender = event.sender.id;
+        if (event.message && event.message.text) {
+            var text = event.message.text;
+            console.log("LOG: Message",text);
+            actions.sendTextMessage(sender,'I am Bot');
+        }
     }
-  }
-  res.sendStatus(200);
+    res.sendStatus(200);
 });
 
 module.exports = app;
