@@ -8,7 +8,6 @@ var app = express();
 app.use(bodyParser);
 
 app.get('/webhook/', function(req, res) {
-    console.log('LOG: This is the query', req.query);
     if (req.query['hub.verify_token'] === AUTH_TOKEN)
         res.send(req.query['hub.challenge']);
     res.send('Error, wrong validation token');
@@ -17,15 +16,17 @@ app.get('/webhook/', function(req, res) {
 
 app.post('/webhook', function(req, res) {
     var data = JSON.parse(Object.keys(req.body)[0]);
-    var messagingEvents = data.entry[0].messaging;
+    var entry = data.entry[0];
+    var messagingEvents = entry.messaging;
 
     for (var index = 0; index < messagingEvents.length; index++) {
-        var event = data.entry[0].messaging[index];
+        var event = entry.messaging[index];
         var sender = event.sender.id;
         if (event.message && event.message.text) {
             var text = event.message.text;
             console.log("LOG: Message",text);
-            actions.sendTextMessage(sender,'I am Bot');
+            var reply = actions.processMessage(text);
+            actions.sendTextMessage(sender,reply);
         }
     }
     res.sendStatus(200);
