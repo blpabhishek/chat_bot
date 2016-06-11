@@ -23,8 +23,5 @@ var errorHandler = function(error, response, body) {
         console.log('Error: ', response.body.error);
 }
 
-var processMessage = function(text) {
-    return "You are Welcome";
-}
 
 module.exports = actions;
