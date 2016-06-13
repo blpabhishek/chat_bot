@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('./bodyParser.js');
+var actions = require('./actions.js');
 var intentParser = require('./intentParser.js');
 
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
@@ -27,7 +28,8 @@ app.post('/webhook', function(req, res) {
             console.log("LOG: Message",text);
         }
     }
-     intentParser.parseMessage(text,sender);
+     //intentParser.parseMessage(text,sender);
+     actions.sendTextMessage(sender,"Welcome");
      res.sendStatus(200);
 });
 

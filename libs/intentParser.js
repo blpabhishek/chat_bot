@@ -12,7 +12,6 @@ request({
     method: 'GET',
 },function (error,response,body) {
     var reply = "Welcome";
-    actions.sendTextMessage(sender,reply);
 });
 }
 
