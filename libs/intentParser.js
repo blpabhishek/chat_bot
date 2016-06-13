@@ -12,6 +12,8 @@ request({
     method: 'GET',
 },function (error,response,body) {
     var reply = "Welcome";
+    console.log("Response from Wit",body);
+    actions.sendTextMessage(sender,reply);
 });
 }
 

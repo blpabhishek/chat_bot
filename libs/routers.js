@@ -19,18 +19,16 @@ app.post('/webhook', function(req, res) {
     var data = JSON.parse(Object.keys(req.body)[0]);
     var entry = data.entry[0];
     var messagingEvents = entry.messaging;
-
+        
     for (var index = 0; index < messagingEvents.length; index++) {
         var event = entry.messaging[index];
         var sender = event.sender.id;
         if (event.message && event.message.text) {
             var text = event.message.text;
             console.log("LOG: Message",text);
-            actions.sendTextMessage(sender,"Welcome");
+            intentParser.parseMessage(text,sender);
         }
     }
-     //intentParser.parseMessage(text,sender);
-    
      res.sendStatus(200);
 });
 
