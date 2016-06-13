@@ -12,6 +12,7 @@ request({
 },function (error,response,body) {
     console.log(body);
     var reply = "Welcome";
+    console.log(callback);
     callback(reply,sender);
 });
 }
