@@ -1,8 +1,8 @@
 var request = require('request');
 var intentParser = {};
 
-MY_WIT_TOKEN = process.env.MY_WIT_TOKEN;
-intentParser.parseMessage = function(text){
+const MY_WIT_TOKEN = process.env.MY_WIT_TOKEN;
+intentParser.parseMessage = function(text,sender,callback){
 request({
     url: 'https://api.wit.ai/message',
     qs:{'access_token' : MY_WIT_TOKEN,
@@ -11,8 +11,9 @@ request({
     method: 'GET',
 },function (error,response,body) {
     console.log(body);
+    var reply = "Welcome";
+    callback(reply,sender);
 });
-    return "Welcome Here";
 }
 
 intentParser.parseMessage("Hello");

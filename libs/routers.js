@@ -26,11 +26,12 @@ app.post('/webhook', function(req, res) {
         if (event.message && event.message.text) {
             var text = event.message.text;
             console.log("LOG: Message",text);
-            var reply = intentParser.parseMessage(text);
-            actions.sendTextMessage(sender,reply);
         }
     }
-    res.sendStatus(200);
+     intentParser.parseMessage(text,sender,function(reply,sender) {
+         actions.sendTextMessage(reply,sender);
+     });
+     res.sendStatus(200);
 });
 
 app.get('/policy.html',function(req,res){
